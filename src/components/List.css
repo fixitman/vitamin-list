@@ -1,0 +1,37 @@
+ul {
+    background-color: bisque;
+    margin: 0px;
+    padding: 10px 40px;
+    border: 2px solid blue;
+    border-radius: 20px;
+}
+
+li {
+    list-style: none;
+    margin: 25px 0px;
+    border: 2px solid blue;
+    border-radius: 10px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+}
+
+li>label {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+li>input {
+    width: 15px;
+    height: 15px;
+}
+
+li>button {
+    margin-left: 10px;
+}
+
+li.emptyItem {
+    justify-content: center;
+    color: blue;
+    font-weight: 900;
+}
