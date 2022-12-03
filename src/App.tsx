@@ -6,8 +6,6 @@ let text = 'Hello!!'
 
 function App() {
   
-  
-
   return (
     <>
       <List list={dataList}/>

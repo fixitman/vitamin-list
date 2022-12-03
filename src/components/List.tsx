@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './List.css'
 import { item } from '../data'
 import ListItem from './ListItem'
