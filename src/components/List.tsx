@@ -20,6 +20,31 @@ function List(props: { list: item[] }) {
     setItems(newList)
   }
 
+  const moveItem = (from: number, to:number)=>{
+    if(from === to)return
+    let newList = insertAndShift(items,to,from)
+    setItems(newList)
+  }
+
+  const insertAndShift = (arr: any[], to: number, from: number) => {
+    let newArray: item[] = [];
+    const fromItem = arr[from];
+    if (from > to) {
+      const startToTo = (to > 0) ? arr.slice(0, to) : [];
+      const toToFrom = arr.slice(to, from);
+      const fromToEnd = arr.slice(from + 1, arr.length);
+      newArray = newArray.concat(startToTo, [fromItem], toToFrom, fromToEnd);
+    }
+    
+    if (to > from) {
+      const startToFrom = (from > 0) ? arr.slice(0, from) : [];
+      const fromToTo = arr.slice(from + 1, to + 1);
+      const toToEnd = arr.slice(to + 1, arr.length);
+      newArray = newArray.concat(startToFrom, fromToTo, fromItem, toToEnd);
+    }
+    return newArray;
+  };
+
 
   return (
     <ul id='itemList'>
@@ -27,8 +52,8 @@ function List(props: { list: item[] }) {
         items.length === 0 && (<li className='emptyItem'>Nothing to do!</li>)
         ||
         (
-          items.map((i) => (
-            <ListItem  key={i.id} listItem={i} deleteItem={deleteItem} updateItem={updateItem} />)
+          items.map((i,index) => (
+            <ListItem  key={i.id} index={index} listItem={i} deleteItem={deleteItem} updateItem={updateItem} moveItem={moveItem}/>)
           )
         )
       }
