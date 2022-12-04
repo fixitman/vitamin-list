@@ -22,11 +22,11 @@ function List(props: { list: item[] }) {
 
   const moveItem = (from: number, to:number)=>{
     if(from === to)return
-    let newList = insertAndShift(items,to,from)
+    let newList = insertAndShift(items,from,to)
     setItems(newList)
   }
 
-  const insertAndShift = (arr: any[], to: number, from: number) => {
+  const insertAndShift = (arr: any[], from: number,to: number) => {
     let newArray: item[] = [];
     const fromItem = arr[from];
     if (from > to) {
