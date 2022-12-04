@@ -12,19 +12,23 @@ function List(props: { list: item[] }) {
     setItems(newList)
   }
 
- 
+  const updateItem = (newItem: item) => {
+    let newList: item[] = []
+    items.forEach((i) => {
+      newList.push(i.id === newItem.id ? newItem : i)
+    })
+    setItems(newList)
+  }
+
+
   return (
-    <ul>
+    <ul id='itemList'>
       {
-        items.length === 0 && <li className='emptyItem'>Nothing to do!</li>
-      }
-
-      {
-        items.length > 0 && (
-
+        items.length === 0 && (<li className='emptyItem'>Nothing to do!</li>)
+        ||
+        (
           items.map((i) => (
-          
-          <ListItem listItem={i} deleteItem={deleteItem}/>)
+            <ListItem  key={i.id} listItem={i} deleteItem={deleteItem} updateItem={updateItem} />)
           )
         )
       }

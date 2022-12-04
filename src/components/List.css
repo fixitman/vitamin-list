@@ -1,4 +1,4 @@
-ul {
+ul#itemList {
     background-color: bisque;
     margin: 0px;
     padding: 10px 40px;
@@ -6,7 +6,7 @@ ul {
     border-radius: 20px;
 }
 
-li {
+li.listItem {
     list-style: none;
     margin: 25px 0px;
     border: 2px solid blue;
@@ -14,24 +14,28 @@ li {
     padding: 5px 15px;
     display: flex;
     align-items: center;
+    
 }
 
-li>label {
+li label {
     flex-grow: 1;
-    margin-left: 10px;
+    margin-left: 10px;    
 }
 
-li>input {
+li input {
     width: 15px;
     height: 15px;
 }
 
-li>button {
+li button {
     margin-left: 10px;
 }
 
 li.emptyItem {
+    display: flex;
+    list-style: none;
     justify-content: center;
     color: blue;
     font-weight: 900;
 }
+
