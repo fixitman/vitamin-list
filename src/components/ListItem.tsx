@@ -29,7 +29,6 @@ const ListItem = (props: ListItemProps) => {
   const handleDrop = (e: React.DragEvent<HTMLLIElement>, dropIndex: number) => {
     e.preventDefault()
     let srcIndex: number = +(e.dataTransfer.getData('item1'))
-    console.log(`dropping ${srcIndex} on ${dropIndex}`)
     props.moveItem(srcIndex, dropIndex)
   }
 
@@ -50,7 +49,7 @@ const ListItem = (props: ListItemProps) => {
     >
 
       <input id={i.id.toString()} type='checkbox' checked={i.completed} onChange={handleCheckChange} />
-      <label htmlFor={i.id.toString()}>{`${i.id} ${i.todo}`}</label>
+      <label htmlFor={i.id.toString()}>{`${i.todo}`}</label>
       <button
         className='deleteButton'
         onClick={() => props.deleteItem(i.id)}
