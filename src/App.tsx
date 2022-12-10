@@ -3,17 +3,18 @@ import './App.css'
 import List from './components/List'
 import SingleInputForm from './components/SingleInputForm'
 import { item } from './data'
-import ListDataLocal from './DataProvider'
+import ListDataLocal, {DataProvider} from './DataProvider'
 
 
 
 function App() {
 
+  let dataProvider: DataProvider<item[]> = ListDataLocal.instance
   let [items, setItems] = useState([] as item[])
 
   const saveItems = (newItems: item[])=>{
     setItems(newItems) // updates UI
-    ListDataLocal.instance.saveData(newItems)  // persists data
+    dataProvider.saveData(newItems)  // persists data
     console.log('Data saved')
   }
   
@@ -88,7 +89,7 @@ function App() {
   }
 
   useEffect(()=>{
-    setItems(ListDataLocal.instance.loadData())
+    setItems(dataProvider.loadData())
     console.log('loading...')
   },[])
 
