@@ -1,6 +1,5 @@
-import { ChangeEventHandler, MouseEventHandler } from 'react'
+import { ChangeEventHandler, MouseEventHandler, useEffect } from 'react'
 import { item } from '../data'
-
 
 export interface ListItemProps {
   listItem: item,
@@ -37,8 +36,7 @@ const ListItem = (props: ListItemProps) => {
     e.dataTransfer.dropEffect = 'move'
   }
 
-
-
+ 
   return (
     <li className='listItem'
       draggable
@@ -49,7 +47,7 @@ const ListItem = (props: ListItemProps) => {
     >
 
       <input id={i.id.toString()} type='checkbox' checked={i.completed} onChange={handleCheckChange} />
-      <label htmlFor={i.id.toString()}>{`${i.todo}`}</label>
+      <label htmlFor={i.id.toString()} className={i.completed? 'strikeThru' : ''}>{`${i.todo}`}</label>
       <button
         className='deleteButton'
         onClick={() => props.deleteItem(i.id)}

@@ -1,18 +1,25 @@
-import { FormEventHandler, useState } from 'react'
+import { FormEventHandler, useEffect, useState } from 'react'
 import './App.css'
 import List from './components/List'
 import SingleInputForm from './components/SingleInputForm'
-import data, { item } from './data'
+import { item } from './data'
+import ListDataLocal from './DataProvider'
 
 
 
 function App() {
 
-  let [items, setItems] = useState(data)
+  let [items, setItems] = useState([] as item[])
 
+  const saveItems = (newItems: item[])=>{
+    setItems(newItems) // updates UI
+    ListDataLocal.instance.saveData(newItems)  // persists data
+    console.log('Data saved')
+  }
+  
   const deleteItem = (id: number) => {
     let newList = items.filter(i => i.id !== id)
-    setItems(newList)
+    saveItems(newList)
   }
 
   const updateItem = (newItem: item) => {
@@ -20,13 +27,13 @@ function App() {
     items.forEach((i) => {
       newList.push(i.id === newItem.id ? newItem : i)
     })
-    setItems(newList)
+    saveItems(newList)
   }
 
   const moveItem = (from: number, to: number) => {
     if (from === to) return
     let newList = insertAndShift(items, from, to)
-    setItems(newList)
+    saveItems(newList)
   }
 
   const insertAndShift = (arr: any[], from: number, to: number) => {
@@ -75,10 +82,15 @@ function App() {
       userId: 1
 
     }
-    setItems([...items, newItem])
+    saveItems([...items, newItem])
 
 
   }
+
+  useEffect(()=>{
+    setItems(ListDataLocal.instance.loadData())
+    console.log('loading...')
+  },[])
 
   return (
     <>

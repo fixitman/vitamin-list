@@ -4,20 +4,28 @@ import { item } from '../data'
 import ListItem from './ListItem'
 
 
-function List({ items, deleteItem, updateItem, moveItem }
+function List({ items, deleteItem, updateItem, moveItem, }
   :{items:item[], 
     deleteItem:(a:number)=>void, 
     updateItem:(a:item)=>void, 
     moveItem:(a:number,b:number)=>void}) {
 
+      let sorted = !true;
+
+      let sortedItems = [...items]
+
+      if(sorted){
+        sortedItems.sort((a,b)=> +a.completed - +b.completed)
+      }
+
 
   return (
     <ul id='itemList'>
       {
-        items.length === 0 && (<li className='emptyItem'>Nothing to do!</li>)
+        sortedItems.length === 0 && (<li className='emptyItem'>Nothing to do!</li>)
         ||
         (
-          items.map((i, index) => (
+          sortedItems.map((i, index) => (
             <ListItem key={i.id} index={index} listItem={i} deleteItem={deleteItem} updateItem={updateItem} moveItem={moveItem} />)
           )
         )

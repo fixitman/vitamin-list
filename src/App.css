@@ -16,3 +16,7 @@ body{
   padding: 2rem;
   
 }
+
+.strikeThru {
+  text-decoration: line-through;
+}
